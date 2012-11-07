@@ -1,0 +1,6 @@
+#!/bin/bash
+
+DISABLED=/etc/symbiosis/monit.d/disabled
+
+mkdir -p $(dirname $DISABLED)
+touch $DISABLED
