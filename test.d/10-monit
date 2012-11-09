@@ -3,17 +3,19 @@
 rm -f /etc/cron.d/symbiosis-monit
 rm -f /etc/symbiosis/monit.d/disabled
 
-#
-# FUCK OFF DOVECOT.
-#
-killall -9 -u dovecot
+do_monit() {
+  #
+  # Make sure clamav + spamassassin stay running
+  #
+
+  touch /srv/$(hostname)/config/anti{spam,virus}
+
+  /usr/sbin/symbiosis-monit 
+}
 
 #
-# Make sure clamav + spamassassin stay running
+# Have a couple of goes running monit 
 #
+trap do_monit ERR
 
-touch /srv/$(hostname)/config/anti{spam,virus}
-
-export TERM=dummy
-exec /usr/sbin/symbiosis-monit --verbose
-
+do_monit

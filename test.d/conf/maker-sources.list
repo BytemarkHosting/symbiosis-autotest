@@ -1,0 +1,4 @@
+deb http://maker.sh.bytemark.co.uk/archives/symbiosis-squeeze/latest/ ./
+deb http://maker.sh.bytemark.co.uk/archives/ruby-cracklib/squeeze/latest/ ./
+deb http://maker.sh.bytemark.co.uk/archives/netlinkrb/squeeze/latest/ ./
+

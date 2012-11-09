@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+
+set -e
+
+PREFIX=$(dirname ${0})
+
+if [ -f $PREFIX/conf/action -a "upgrade" == "$(< ${PREFIX}/conf/action}" ] ; then
+  echo "I: Installing current version of Symbiosis from repo.bytemark.co.uk"
+  $PREFIX/bin/apt-get-install $PREFIX/conf/current-sources.list $PREFIX/conf/packages
+  echo "I: Performing dist-upgrade"
+  $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list
+else 
+  echo "I: Installing latest version of Symbiosis from maker.sh.bytemark.co.uk"
+  $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/packages
+fi
+
+
