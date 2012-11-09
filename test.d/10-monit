@@ -13,6 +13,19 @@ do_monit() {
   /usr/sbin/symbiosis-monit 
 }
 
+echo -n "I: Waiting for clamav to download databases."
+for i in $(seq 1 120) ; do
+
+  if [ -f "/var/lib/clamav/main.cvd" -a -f "/var/lib/clamav/daily.cvd" ] ; then
+     echo "done."
+     /etc/init.d/clamav-daemon restart
+     break
+  fi
+
+  echo -n "."
+  sleep 1
+done
+
 #
 # Have a couple of goes running monit 
 #
