@@ -8,16 +8,20 @@ set -e
 #
 SOURCES="$1"
 PACKAGES="$2"
-
-if [ -z "$SOURCES" ] ; then
-  echo "E: no source list given"
-  exit 1
-elif [ ! -f "$SOURCES" ] ; then
-  echo "E: source list $SOURCES missing"
-  exit 1
-fi
-
 ACTION=install
+#
+#  The options to use by default.
+#
+OPTIONS="-o \"APT::Get::AllowUnauthenticated=true\" -o \"DPkg::options::=--force-confdef\" -o \"DPkg::options::=--force-confnew\""
+
+#
+# Copy sources in place.
+#
+if [ -n "$SOURCES" ] ; then
+  mkdir -p $VERBOSE /etc/apt/sources.list.d
+  cp $VERBOSE $SOURCES /etc/apt/sources.list.d/
+  OPTIONS=${OPTIONS/confnew/confold}
+fi
 
 if [ -z "$PACKAGES" ] ; then
   ACTION=dist-upgrade
@@ -34,19 +38,12 @@ if [ ! -x /usr/bin/apt-get ] ; then
     exit 1
 fi
 
-mkdir -p $VERBOSE /etc/apt/sources.list.d
-cp $VERBOSE $SOURCES /etc/apt/sources.list.d/
-
 #
 #  Minimise debconf front-end
 #
 DEBIAN_FRONTEND=noninteractive
 export DEBIAN_FRONTEND
 
-#
-#  The options to use by default.
-#
-OPTIONS="-o \"APT::Get::AllowUnauthenticated=true\" -o \"DPkg::Options::=--force-confold\""
 
 #
 #  Update our sources list first.
@@ -56,6 +53,7 @@ apt-get $OPTIONS update
 #
 #  Now simulate a dist-upgrade so that we can see if we need to do anything
 #
+echo /usr/bin/apt-get $OPTIONS $ACTION --yes --force-yes
 if [ "$ACTION" = "install" ] ; then
   /usr/bin/apt-get $OPTIONS install --yes --force-yes $(< $PACKAGES)
 else

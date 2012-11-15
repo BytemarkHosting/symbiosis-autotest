@@ -1,7 +1,12 @@
 #!/bin/bash
 
 rm -f /etc/cron.d/symbiosis-monit
-rm -f /etc/symbiosis/monit.d/disabled
+#
+# This works for both lenny and squeeze+
+#
+for i in /etc/symbiosis/monit.d/disabled /tmp/dpkg.running ; do
+  rm $i
+done
 
 do_monit() {
   #
@@ -13,7 +18,11 @@ do_monit() {
   /usr/sbin/symbiosis-monit 
 }
 
-echo -n "I: Waiting for clamav to download databases... "
+echo -n "I: Adding db.local.clamav.net alias to /etc/hosts"
+echo "212.110.161.69 db.local.clamav.net" >> /etc/hosts
+invoke-rc.d clamav-freshclam restart
+
+echo -n "I: Waiting for clamav to download databases."
 for i in $(seq 1 300) ; do
 
   if [ -f "/var/lib/clamav/main.cvd" -a -f "/var/lib/clamav/daily.cvd" ] ; then
