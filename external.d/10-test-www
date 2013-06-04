@@ -1,0 +1,7 @@
+#!/bin/bash
+
+. $(dirname $0)/common
+
+curl -s -I -H "Host: $HOSTNAME" http://$IP/bytemark/
+curl -s -k -I -H "Host: $HOSTNAME" https://$IP/bytemark/
+

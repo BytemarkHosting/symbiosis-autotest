@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+. $(dirname $0)/common
+
+echo -e "\nAUTH\nQUIT" | socat EXEC:"socat-scripter",fdin=3,fdout=4 TCP:$IP:110 
+echo -e "\nAUTH\nQUIT" | socat EXEC:"socat-scripter",fdin=3,fdout=4 OPENSSL:$IP:995,verify=0 
+

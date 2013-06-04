@@ -1,0 +1,6 @@
+#!/bin/bash
+
+. $(dirname $0)/common
+
+echo -e "\nNOOP\nQUIT" | socat EXEC:"socat-scripter",fdin=3,fdout=4 TCP:$IP:21
+

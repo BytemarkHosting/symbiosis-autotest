@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+. $(dirname $0)/common
+
+echo -e "\n* CAPABILITY\n* LOGOUT" | socat EXEC:"socat-scripter",fdin=3,fdout=4 TCP:$IP:143 
+echo -e "\n* CAPABILITY\n* LOGOUT" | socat EXEC:"socat-scripter",fdin=3,fdout=4 OPENSSL:$IP:993,verify=0 
+
+
