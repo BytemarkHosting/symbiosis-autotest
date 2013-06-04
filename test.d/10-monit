@@ -18,6 +18,16 @@ do_monit() {
   /usr/sbin/symbiosis-monit 
 }
 
+
+if [ "x${http_proxy}" != "x" ] ; then
+
+  echo "Adding HTTP proxy config to freshclam"
+  proxy_with_port=${http_proxy#http://}
+  proxy_with_port=${proxy_with_port%/}
+  echo "HTTPProxyServer ${proxy_with_port%:*}" >> /etc/clamav/freshclam.conf
+  echo "HTTPProxyPort ${proxy_with_port#*:}" >> /etc/clamav/freshclam.conf
+fi
+
 echo -n "I: Adding db.local.clamav.net alias to /etc/hosts"
 echo "212.110.161.69 db.local.clamav.net" >> /etc/hosts
 invoke-rc.d clamav-freshclam restart

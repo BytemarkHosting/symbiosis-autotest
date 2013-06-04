@@ -6,12 +6,14 @@ set -e
 PREFIX=$(dirname ${0})
 ACTION="install"
 
+dpkg --clear-avail
+
 if [ -f $PREFIX/conf/action ] ; then
   ACTION=$(< ${PREFIX}/conf/action)
 fi
 
-echo "Acquire::http::Proxy::maker.sh.bytemark.co.uk DIRECT;" > /etc/apt/apt.conf.d/95proxy
-echo "Acquire::http::Proxy \"http://maker.sh.bytemark.co.uk:3142\";" >> /etc/apt/apt.conf.d/95proxy
+# echo "Acquire::http::Proxy::maker.sh.bytemark.co.uk DIRECT;" > /etc/apt/apt.conf.d/95proxy
+# echo "Acquire::http::Proxy \"http://maker.sh.bytemark.co.uk:3142\";" >> /etc/apt/apt.conf.d/95proxy
 
 if [ "upgrade" = "$ACTION" ] ; then
   echo "I: Installing current version of Symbiosis from repo.bytemark.co.uk"
