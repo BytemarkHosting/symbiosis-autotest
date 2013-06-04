@@ -12,6 +12,7 @@ do_monit() {
   #
   # Make sure clamav + spamassassin stay running
   #
+  mkdir -p /srv/$(hostname)/config/
 
   touch /srv/$(hostname)/config/anti{spam,virus}
 
