@@ -17,40 +17,40 @@ fi
 
 if [ "upgrade" = "$ACTION" ] ; then
   echo "I: Installing current version of Symbiosis from repo.bytemark.co.uk"
-  $PREFIX/bin/apt-get-install $PREFIX/conf/current-sources.list $PREFIX/conf/packages
+  $PREFIX/bin/apt-get-install $PREFIX/conf/current-wheezy-sources.list $PREFIX/conf/wheezy-packages
   echo "I: Performing dist-upgrade"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list
 
 elif [ "dist-upgrade" = "$ACTION" ] ; then
   #
-  # If we're upgrading from lenny:
+  # If we're upgrading from squeeze:
   #
-  if ( grep -q lenny /etc/apt/sources.list ) ; then
-    echo "I: Installing lenny version of Symbiosis from repo.bytemark.co.uk"
-    $PREFIX/bin/apt-get-install $PREFIX/conf/current-lenny-sources.list $PREFIX/conf/lenny-packages || true
+  if ( grep -q squeeze /etc/apt/sources.list ) ; then
+    echo "I: Installing squeeze version of Symbiosis from repo.bytemark.co.uk"
+    $PREFIX/bin/apt-get-install $PREFIX/conf/current-squeeze-sources.list $PREFIX/conf/squeeze-packages || true
 
     apt-get install -f
 
-    echo "I: Replacing lenny sources with squeeze"
-    cp $PREFIX/conf/debian-squeeze-sources.list /etc/apt/sources.list
+    echo "I: Replacing squeeze sources with wheezy"
+    cp $PREFIX/conf/debian-wheezy-sources.list /etc/apt/sources.list
 
-    echo "I: clamav with lenny is a bit ropey, so I'll clear out the freshclam stuff"
+    echo "I: clamav with squeeze is a bit ropey, so I'll clear out the freshclam stuff"
     invoke-rc.d clamav-daemon stop
     invoke-rc.d clamav-freshclam stop
     rm $VERBOSE -f /var/lib/clamav/*.cv?
   fi
 
   #
-  # Now upgrade to squeeze.
+  # Now upgrade to wheezy.
   #
   echo "I: performing dist-upgrade"
   $PREFIX/bin/apt-get-install
 
   echo "I: ensuring Symbiosis packages are installed"
-  $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/packages
+  $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/wheezy-packages
 else 
 
   echo "I: Installing latest version of Symbiosis from maker.sh.bytemark.co.uk"
-  $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/packages
+  $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/wheezy-packages
 fi
 
