@@ -1,2 +1,3 @@
-deb http://symbiosis.bytemark.co.uk/squeeze ./
-
+deb http://maker.sh.bytemark.co.uk/archives/symbiosis-wheezy/latest/ ./
+deb http://maker.sh.bytemark.co.uk/archives/ruby-cracklib/wheezy/latest/ ./
+deb http://maker.sh.bytemark.co.uk/archives/netlinkrb/wheezy/latest/ ./
