@@ -22,3 +22,5 @@ openssh-server
 postgresql
 ruby-pg
 ruby-mysql
+ruby1.8
+ruby1.9.1

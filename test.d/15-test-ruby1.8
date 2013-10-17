@@ -6,4 +6,5 @@ set -e
 # Timeout commands after 15 minutes .. kill after 20 if the TERM isn't
 # respected.
 #
+update-alternatives --set ruby /usr/bin/ruby1.8
 /usr/bin/timeout -k 20m 15m /usr/bin/symbiosis-test
