@@ -8,9 +8,10 @@
 set -exv
 
 #
-# We expect this will exit 1 when running on a non-Bytemark IP.  So lets check the output.
+# We expect this will exit 1 when running on a non-Bytemark IP.  So lets check
+# the output.
 #
-ans=$(is-bytemark-ip)
+ans=$(is-bytemark-ip || true)
 [ "$ans" = "0" -o "$ans" = "1" ]
 
 #
@@ -29,12 +30,12 @@ ruby -e "ans='$ans'.sub(/^\{CRYPT\}/,'') ; exit '$pw'.crypt(ans) == ans"
 #
 # This just returns the IP address
 #
-symbiosis-ip ---verboseerbose
+symbiosis-ip ---verbose
 
 #
 # Run all crontabs
 #
-symbiosis-all-crontabs ---verboseerbose
+symbiosis-all-crontabs ---verbose
 
 
 #
