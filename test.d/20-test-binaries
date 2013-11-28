@@ -7,7 +7,11 @@
 #
 set -ex
 
-is-bytemark-ip -v
+#
+# We expect this will exit 1 when running on a non-Bytemark IP.
+#
+is-bytemark-ip -v || true
+
 # symbiosis-encrypt-password -v
 symbiosis-ip -v
 which-backup-space -v
