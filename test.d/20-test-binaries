@@ -8,13 +8,25 @@
 set -ex
 
 #
-# We expect this will exit 1 when running on a non-Bytemark IP.
+# We expect this will exit 1 when running on a non-Bytemark IP.  So lets check the output.
 #
-is-bytemark-ip -v || true
+ans=$(is-bytemark-ip)
+[ "$ans" = "0" -o "$ans" = "1" ]
 
-# symbiosis-encrypt-password -v
+#
+# Check backup space finding.
+#
+ans=$(which-backup-space 89.16.174.65)
+[ "$ans" = "example.backup.bytemark.co.uk" ]
+
+#
+# Check password encryption
+#
+pw="correct horse battery staple"
+ans=$(symbiosis-encrypt-password "$pw")
+ruby -e "ans='$ans'.sub(/^\{CRYPT\}/,'') ; exit '$pw'.crypt(ans) == ans"
+
 symbiosis-ip -v
-which-backup-space -v
 symbiosis-crontab -v 
 # symbiosis-apache-logger
 symbiosis-create-mass-hosting-sites -v
