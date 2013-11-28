@@ -1,0 +1,28 @@
+#!/bin/bash
+# 
+#
+
+#
+# This script runs through and executes each program to test its basic functionality.
+#
+set -ex
+
+is-bytemark-ip -v
+# symbiosis-encrypt-password -v
+symbiosis-ip -v
+which-backup-space -v
+symbiosis-crontab -v 
+# symbiosis-apache-logger
+symbiosis-create-mass-hosting-sites -v
+symbiosis-create-sites -v 
+symbiosis-generate-stats -v 
+symbiosis-rotate-logs -v 
+symbiosis-configure-ips -v
+symbiosis-password-test -v
+symbiosis-dns-generate -v
+# symbiosis-check-mailbox-password -v
+symbiosis-firewall -v
+symbiosis-firewall-blacklist -v
+symbiosis-firewall-whitelist -v 
+# symbiosis-check-ftp-password -v
+symbiosis-updater -v
