@@ -46,7 +46,6 @@ symbiosis-crontab --test /tmp/crontab
 
 
 symbiosis-ip --verbose
-symbiosis-crontab --verbose 
 # symbiosis-apache-logger
 symbiosis-create-mass-hosting-sites --verbose
 symbiosis-create-sites --verbose 
