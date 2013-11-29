@@ -72,8 +72,8 @@ echo -e -n "root@$(hostname)\0$pw\0" | symbiosis-check-mailbox-password 3<&0
 #
 # Disable the DNS uploader.
 #
-rm -rf /root/BytemarkDNS/update
-echo "exit 0" > /root/BytemarkDNS/update
+rm -rf /root/BytemarkDNS/upload
+echo "exit 0" > /root/BytemarkDNS/upload
 symbiosis-dns-generate --verbose
 
 #
