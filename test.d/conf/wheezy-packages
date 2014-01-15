@@ -14,7 +14,7 @@ symbiosis-monit
 symbiosis-mysql
 symbiosis-pam
 symbiosis-phpmyadmin
-symbiosis-tinydns
+symbiosis-dns
 symbiosis-updater
 symbiosis-webmail
 symbiosis-webmail-squirrelmail
