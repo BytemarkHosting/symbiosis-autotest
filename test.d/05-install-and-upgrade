@@ -38,6 +38,11 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
     echo "I: Replacing squeeze sources with wheezy"
     cp $PREFIX/conf/debian-wheezy-sources.list /etc/apt/sources.list
 
+    echo "I: Replacing sudoers with clean version to avoid prompt"
+    cp $PREFIX/conf/sudoers.squeeze /etc/sudoers
+    chown root.root /etc/sudoers
+    chmod 600 /etc/sudoers
+
     echo "I: clamav with squeeze is a bit ropey, so I'll clear out the freshclam stuff"
     invoke-rc.d clamav-daemon stop
     invoke-rc.d clamav-freshclam stop
