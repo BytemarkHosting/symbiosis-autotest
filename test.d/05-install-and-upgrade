@@ -24,7 +24,7 @@ if [ "upgrade" = "$ACTION" ] ; then
   echo "I: Installing current version of Symbiosis from repo.bytemark.co.uk"
   $PREFIX/bin/apt-get-install $PREFIX/conf/current-wheezy-sources.list $PREFIX/conf/wheezy-packages
 
-  echo "I: Performing dist-upgrade"
+  echo "I: Performing dist-upgrade from RC1"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list
 
 elif [ "dist-upgrade" = "$ACTION" ] ; then
@@ -38,10 +38,8 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
     echo "I: Replacing squeeze sources with wheezy"
     cp $PREFIX/conf/debian-wheezy-sources.list /etc/apt/sources.list
 
-    echo "I: Replacing sudoers with clean version to avoid prompt"
-    cp $PREFIX/conf/sudoers.squeeze /etc/sudoers
-    chown root.root /etc/sudoers
-    chmod 600 /etc/sudoers
+    echo "I: Removing old squeeze symbiosis list"
+    rm /etc/apt/sources.list.d/current-squeeze-sources.list
 
     echo "I: clamav with squeeze is a bit ropey, so I'll clear out the freshclam stuff"
     invoke-rc.d clamav-daemon stop
@@ -52,24 +50,17 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
   #
   # Now upgrade to wheezy.
   #
-  echo "I: performing dist-upgrade"
+  echo "I: Performing dist-upgrade from squeeze"
 
   #
   # If the install has failed, try to start pure-authd and carry on
   #
-  if ! $PREFIX/bin/apt-get-install ; then
-    #
-    # 
-    #
+  if ! $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list ; then
     /etc/init.d/pure-authd start
     apt-get install -f
   fi
 
-  echo "I: ensuring Symbiosis packages are installed"
-  $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/wheezy-packages
 else 
-
-
 
   echo "I: Installing latest version of Symbiosis from maker.sh.bytemark.co.uk"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/wheezy-packages
