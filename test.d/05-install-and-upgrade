@@ -16,8 +16,14 @@ fi
 # echo "Acquire::http::Proxy \"http://maker.sh.bytemark.co.uk:3142\";" >> /etc/apt/apt.conf.d/95proxy
 
 if [ "upgrade" = "$ACTION" ] ; then
+  #
+  # Wheezy rc1 doesn't have symbiosis-xmpp
+  #
+  sed -i -e '/symbiosis-xmpp/d' $PREFIX/conf/wheezy-packages
+
   echo "I: Installing current version of Symbiosis from repo.bytemark.co.uk"
   $PREFIX/bin/apt-get-install $PREFIX/conf/current-wheezy-sources.list $PREFIX/conf/wheezy-packages
+
   echo "I: Performing dist-upgrade"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list
 
@@ -25,7 +31,7 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
   #
   # If we're upgrading from squeeze:
   #
-  if ( grep -q squeeze /etc/apt/sources.list ) ; then
+  if [ grep -q squeeze /etc/apt/sources.list ] ; then
     echo "I: Installing squeeze version of Symbiosis from repo.bytemark.co.uk"
     $PREFIX/bin/apt-get-install $PREFIX/conf/current-squeeze-sources.list $PREFIX/conf/squeeze-packages || true
 
@@ -49,6 +55,8 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
   echo "I: ensuring Symbiosis packages are installed"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/wheezy-packages
 else 
+
+
 
   echo "I: Installing latest version of Symbiosis from maker.sh.bytemark.co.uk"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/wheezy-packages
