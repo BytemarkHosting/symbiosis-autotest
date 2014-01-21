@@ -60,7 +60,11 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
     apt-get install -f
   fi
 
+  echo "I: ensuring Symbiosis packages are installed"
+  $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/wheezy-packages
 else 
+
+
 
   echo "I: Installing latest version of Symbiosis from maker.sh.bytemark.co.uk"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/wheezy-packages
