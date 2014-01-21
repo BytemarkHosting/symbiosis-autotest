@@ -31,11 +31,9 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
   #
   # If we're upgrading from squeeze:
   #
-  if [ grep -q squeeze /etc/apt/sources.list ] ; then
+  if grep -q squeeze /etc/apt/sources.list ; then
     echo "I: Installing squeeze version of Symbiosis from repo.bytemark.co.uk"
     $PREFIX/bin/apt-get-install $PREFIX/conf/current-squeeze-sources.list $PREFIX/conf/squeeze-packages || true
-
-    apt-get install -f
 
     echo "I: Replacing squeeze sources with wheezy"
     cp $PREFIX/conf/debian-wheezy-sources.list /etc/apt/sources.list
@@ -50,7 +48,17 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
   # Now upgrade to wheezy.
   #
   echo "I: performing dist-upgrade"
-  $PREFIX/bin/apt-get-install
+
+  #
+  # If the install has failed, try to start pure-authd and carry on
+  #
+  if ! $PREFIX/bin/apt-get-install ; then
+    #
+    # 
+    #
+    /etc/init.d/pure-authd start
+    apt-get install -f
+  fi
 
   echo "I: ensuring Symbiosis packages are installed"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/wheezy-packages
