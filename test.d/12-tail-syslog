@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "I: Tailing syslog
+tail -f /var/log/syslog &
+
