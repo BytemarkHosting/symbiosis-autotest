@@ -19,13 +19,25 @@ do_set_up() {
 }
 
 do_catch_error() {
+  #
+  # Reset trap
+  #
+  trap - ERR
+
   STATUS="FAIL"
+
   exit 1
 }
 
 do_tidy_up() {
   exec 1<&6
   exec 2<&7
+
+  #
+  # Reset traps
+  #
+  trap - ERR
+  trap - EXIT
 
   echo "$(basename $0): $STATUS"
   if [ "$VERBOSE" ] || [ "$STATUS" == "FAIL" ] ; then cat $OUTPUT ; fi

@@ -11,7 +11,12 @@
 set -e
 
 
-do_tidy_up() {
+do_socat_tidy_up() {
+  #
+  # Reset traps  
+  #
+  trap - ERR
+
   # Close file descriptors
   echo "FAIL" >&1
   exec 3>&-
@@ -19,7 +24,7 @@ do_tidy_up() {
   exit 1
 }
 
-trap do_tidy_up ERR
+trap do_socat_tidy_up ERR
 
 while read -r cmd; do 
     #
