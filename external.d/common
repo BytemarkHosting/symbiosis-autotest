@@ -2,9 +2,11 @@
 
 set -e
 
-
 do_set_up() {
-  if [ -e "$(dirname $0)/VERBOSE" ] ; then VERBOSE="-v" ; fi
+  if [ -e "$(dirname $0)/VERBOSE" ] ; then 
+    set -x
+    VERBOSE="-v" 
+  fi
 
   IP=${SSH_CLIENT%% *}
   REMOTE_HOSTNAME=$1
