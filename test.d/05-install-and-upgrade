@@ -6,6 +6,9 @@ set -e
 PREFIX=$(dirname ${0})
 ACTION="install"
 
+GATEWAY=$(/sbin/ip route | awk '/default/ { print $3 }')
+sed -i $PREFIX/conf/maker-sources.list -e "s://[^/]*/://$GATEWAY/:g"
+
 dpkg --clear-avail
 
 if [ -f $PREFIX/conf/action ] ; then
