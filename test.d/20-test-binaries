@@ -95,5 +95,5 @@ symbiosis-firewall-whitelist --verbose
 # And finally our updater.
 #
 echo QUIET="" > /etc/symbiosis/updater
-echo SSH_TTY="foo" > /etc/symbiosis/updater
+echo SSH_TTY="foo" >> /etc/symbiosis/updater
 symbiosis-updater
