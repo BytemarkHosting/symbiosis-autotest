@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x 
-
 . $(dirname $0)/common
 
 echo -e "\nEHLO $(hostname)\nQUIT" | socat EXEC:"socat-scripter",fdin=3,fdout=4 TCP:$IP:25 
