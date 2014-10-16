@@ -1,4 +1,4 @@
-deb http://maker.sh.bytemark.co.uk/archives/symbiosis-wheezy/latest/ ./
-deb http://maker.sh.bytemark.co.uk/archives/ruby-cracklib/wheezy/latest/ ./
-deb http://maker.sh.bytemark.co.uk/archives/netlinkrb/wheezy/latest/ ./
-deb http://maker.sh.bytemark.co.uk/archives/prosody-modules-0.8/wheezy/latest/ ./
+deb http://maker2.bytemark.co.uk/archives/symbiosis-wheezy/latest/ ./
+deb http://maker2.bytemark.co.uk/archives/ruby-cracklib/wheezy/latest/ ./
+deb http://maker2.bytemark.co.uk/archives/netlinkrb/wheezy/latest/ ./
+deb http://maker2.bytemark.co.uk/archives/prosody-modules-0.8/wheezy/latest/ ./

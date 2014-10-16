@@ -15,8 +15,8 @@ if [ -f $PREFIX/conf/action ] ; then
   ACTION=$(< ${PREFIX}/conf/action)
 fi
 
-# echo "Acquire::http::Proxy::maker.sh.bytemark.co.uk DIRECT;" > /etc/apt/apt.conf.d/95proxy
-# echo "Acquire::http::Proxy \"http://maker.sh.bytemark.co.uk:3142\";" >> /etc/apt/apt.conf.d/95proxy
+# echo "Acquire::http::Proxy::maker2.bytemark.co.uk DIRECT;" > /etc/apt/apt.conf.d/95proxy
+# echo "Acquire::http::Proxy \"http://maker2.bytemark.co.uk:3142\";" >> /etc/apt/apt.conf.d/95proxy
 
 if [ "upgrade" = "$ACTION" ] ; then
   #
@@ -69,7 +69,7 @@ else
 
 
 
-  echo "I: Installing latest version of Symbiosis from maker.sh.bytemark.co.uk"
+  echo "I: Installing latest version of Symbiosis from maker2.bytemark.co.uk"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/wheezy-packages
 fi
 
