@@ -50,7 +50,7 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
     #rm $VERBOSE -f /var/lib/clamav/*.cv?
 
     echo "I: make sure services are running"
-    $PWD/11-monit
+    $PREFIX/11-monit
   fi
 
   #
