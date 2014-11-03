@@ -16,7 +16,11 @@ do_monit() {
 
   touch /srv/$(hostname)/config/anti{spam,virus}
 
-  /usr/sbin/symbiosis-monit --force
+  if /usr/sbin/symbiosis-monit --help | grep -q -- --force ; then
+    /usr/sbin/symbiosis-monit --force
+  else
+    /usr/sbin/symbiosis-monit
+  fi
 }
 
 
