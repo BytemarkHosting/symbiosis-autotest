@@ -44,10 +44,10 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
     echo "I: Removing old squeeze symbiosis list"
     rm /etc/apt/sources.list.d/current-squeeze-sources.list
 
-    echo "I: clamav with squeeze is a bit ropey, so I'll clear out the freshclam stuff"
-    invoke-rc.d clamav-daemon stop
-    invoke-rc.d clamav-freshclam stop
-    rm $VERBOSE -f /var/lib/clamav/*.cv?
+    #echo "I: clamav with squeeze is a bit ropey, so I'll clear out the freshclam stuff"
+    #invoke-rc.d clamav-daemon stop
+    #invoke-rc.d clamav-freshclam stop
+    #rm $VERBOSE -f /var/lib/clamav/*.cv?
 
     echo "I: make sure services are running"
     $PWD/11-monit
