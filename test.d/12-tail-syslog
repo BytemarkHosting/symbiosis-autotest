@@ -1,5 +1,7 @@
 #!/bin/bash
 
-echo "I: Tailing syslog"
-tail -f /var/log/syslog &
+if [ -f /var/log/syslog ] ; then
+  echo "I: Tailing syslog"
+  tail -f /var/log/syslog &
+fi
 
