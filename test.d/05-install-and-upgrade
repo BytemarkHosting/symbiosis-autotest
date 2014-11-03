@@ -48,6 +48,9 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
     invoke-rc.d clamav-daemon stop
     invoke-rc.d clamav-freshclam stop
     rm $VERBOSE -f /var/lib/clamav/*.cv?
+
+    echo "I: make sure services are running"
+    $PWD/11-monit
   fi
 
   #
