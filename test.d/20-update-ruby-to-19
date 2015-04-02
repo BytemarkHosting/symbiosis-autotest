@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -e
-
-update-alternatives --set ruby /usr/bin/ruby1.9.1
