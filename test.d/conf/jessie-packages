@@ -17,7 +17,7 @@ symbiosis-phpmyadmin
 symbiosis-dns
 symbiosis-updater
 symbiosis-webmail
-symbiosis-webmail-roundcube
+# symbiosis-webmail-roundcube
 symbiosis-webmail-squirrelmail
 symbiosis-xmpp
 openssh-server
