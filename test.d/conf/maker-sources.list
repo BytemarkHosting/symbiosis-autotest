@@ -2,3 +2,4 @@ deb http://maker2.bytemark.co.uk/archives/symbiosis-jessie/latest/ ./
 deb http://maker2.bytemark.co.uk/archives/netlinkrb/jessie/latest/ ./
 deb http://maker2.bytemark.co.uk/archives/prosody-modules/jessie/latest/ ./
 deb http://maker2.bytemark.co.uk/archives/ruby-cracklib/jessie/latest/ ./
+deb http://maker2.bytemark.co.uk/archives/bytemark-key/jessie/latest/ ./
