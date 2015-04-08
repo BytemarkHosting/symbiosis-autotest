@@ -7,6 +7,34 @@
 #
 set -exv
 
+#=============================================================================================================
+# symbiosis-common
+#
+#
+# Check password encryption 
+#
+pw="correct horse battery staple"
+ans=$(symbiosis-encrypt-password "$pw")
+ruby -e "ans='$ans'.sub(/^\{CRYPT\}/,'') ; exit '$pw'.crypt(ans) == ans"
+
+#
+# Set the mailbox password using our newly encrypted password
+#
+echo "$ans" > /srv/$(hostname)/mailboxes/root/password
+chown admin.admin /srv/$(hostname)/mailboxes/root/password
+
+#
+# Set the FTP password
+#
+echo "$ans" > /srv/$(hostname)/config/ftp-password
+chown admin.admin /srv/$(hostname)/config/ftp-password
+
+#
+# This just returns the IP address
+#
+symbiosis-ip --verbose
+symbiosis-configure-ips --verbose
+
 #
 # We expect this will exit 1 when running on a non-Bytemark IP.  So lets check
 # the output.
@@ -21,16 +49,13 @@ ans=$(which-backup-space 89.16.174.65)
 [ "$ans" = "example.backup.bytemark.co.uk" ]
 
 #
-# Check password encryption
+# Password weakness tester
 #
-pw="correct horse battery staple"
-ans=$(symbiosis-encrypt-password "$pw")
-ruby -e "ans='$ans'.sub(/^\{CRYPT\}/,'') ; exit '$pw'.crypt(ans) == ans"
+symbiosis-password-test --verbose
 
+#=============================================================================================================
+# symbiosis-cron
 #
-# This just returns the IP address
-#
-symbiosis-ip --verbose
 
 #
 # Run all crontabs
@@ -45,43 +70,26 @@ echo "@daily echo foo" > /tmp/crontab
 symbiosis-crontab --test /tmp/crontab
 
 
-symbiosis-ip --verbose
-# symbiosis-apache-logger
-symbiosis-create-mass-hosting-sites --verbose
-symbiosis-create-sites --verbose 
-symbiosis-generate-stats --verbose 
-symbiosis-rotate-logs --verbose 
-symbiosis-configure-ips --verbose
-
+#=============================================================================================================
+# symbiosis-dns
 #
-# Set the mailbox password
-#
-echo "$ans" > /srv/$(hostname)/mailboxes/root/password
-chown admin.admin /srv/$(hostname)/mailboxes/root/password
-
-#
-# Password weakness tester
-#
-symbiosis-password-test --verbose
-
-#
-# Test the mailbox password (set above)
-#
-echo -e -n "root@$(hostname)\0$pw\0" | symbiosis-check-mailbox-password 3<&0
 
 #
 # Disable the DNS uploader.
 #
-rm -rf /root/BytemarkDNS/upload
 echo "exit 0" > /root/BytemarkDNS/upload
+
+# Now test it
 symbiosis-dns-generate --verbose
 
+#=============================================================================================================
+# symbiosis-email
 #
-# Check the FTP password
+echo -e -n "root@$(hostname)\0$pw\0" | symbiosis-check-mailbox-password 3<&0
+
+#=============================================================================================================
+# symbiosis-firewall
 #
-echo "$ans" > /srv/$(hostname)/config/ftp-password
-chown admin.admin /srv/$(hostname)/config/ftp-password
-AUTHD_ACCOUNT="$(hostname)" AUTHD_PASSWORD="$pw" AUTHD_REMOTE_IP="1.2.3.4" symbiosis-check-ftp-password
 
 #
 # Now check the firewall scripts
@@ -90,10 +98,34 @@ symbiosis-firewall --verbose
 symbiosis-firewall-blacklist --verbose
 symbiosis-firewall-whitelist --verbose 
 
+#=============================================================================================================
+# symbiosis-ftpd
+#
 
 #
-# And finally our updater.
+# Check the FTP password
 #
+AUTHD_ACCOUNT="$(hostname)" AUTHD_PASSWORD="$pw" AUTHD_REMOTE_IP="1.2.3.4" symbiosis-check-ftp-password
+
+#=============================================================================================================
+# symbiosis-httpd
+#
+# symbiosis-httpd-logger
+symbiosis-httpd-configure --verbose
+symbiosis-httpd-generate-stats --verbose 
+symbiosis-httpd-rotate-logs --verbose 
+
+
+#=============================================================================================================
+# symbiosis-updater
+#
+
 echo QUIET="" > /etc/symbiosis/updater
 echo SSH_TTY="foo" >> /etc/symbiosis/updater
 symbiosis-updater
+
+#
+#=============================================================================================================
+# symbiosis-xmpp
+# 
+symbiosis-xmpp-configure --verbose
