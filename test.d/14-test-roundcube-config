@@ -1,6 +1,11 @@
 #!/bin/bash
 
 #
+# TODO: Remove me when roundcube can be installed on jessie
+#
+exit 0
+
+#
 # We've established that a previous postinst script
 # for symbiosis-webmail-roundcube was removing people's
 # configurations, including ones which were customised.
