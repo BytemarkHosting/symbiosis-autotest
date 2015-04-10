@@ -116,14 +116,6 @@ symbiosis-httpd-generate-stats --verbose
 symbiosis-httpd-rotate-logs --verbose 
 
 
-#=============================================================================================================
-# symbiosis-updater
-#
-
-echo QUIET="" > /etc/symbiosis/updater
-echo SSH_TTY="foo" >> /etc/symbiosis/updater
-symbiosis-updater
-
 #
 #=============================================================================================================
 # symbiosis-xmpp
