@@ -83,11 +83,6 @@ echo "exit 0" > /root/BytemarkDNS/upload
 symbiosis-dns-generate --verbose
 
 #=============================================================================================================
-# symbiosis-email
-#
-echo -e -n "root@$(hostname)\0$pw\0" | symbiosis-check-mailbox-password 3<&0
-
-#=============================================================================================================
 # symbiosis-firewall
 #
 
