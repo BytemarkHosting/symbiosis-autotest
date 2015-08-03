@@ -100,7 +100,7 @@ symbiosis-firewall-whitelist --verbose
 #
 # Check the FTP password
 #
-AUTHD_ACCOUNT="$(hostname)" AUTHD_PASSWORD="$pw" AUTHD_REMOTE_IP="1.2.3.4" symbiosis-check-ftp-password
+AUTHD_ACCOUNT="$(hostname)" AUTHD_PASSWORD="$pw" AUTHD_REMOTE_IP="1.2.3.4" symbiosis-ftpd-check-password
 
 #=============================================================================================================
 # symbiosis-httpd
