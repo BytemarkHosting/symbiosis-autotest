@@ -18,6 +18,7 @@ symbiosis-dns
 symbiosis-updater
 symbiosis-webmail
 symbiosis-webmail-squirrelmail
+symbiosis-webmail-roundcube
 symbiosis-xmpp
 openssh-server
 postgresql
