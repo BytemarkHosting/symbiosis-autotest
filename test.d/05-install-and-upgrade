@@ -21,6 +21,9 @@ fi
 if [ "upgrade" = "$ACTION" ] ; then
   echo "I: Installing current version of Symbiosis from repo.bytemark.co.uk"
   $PREFIX/bin/apt-get-install $PREFIX/conf/current-jessie-sources.list $PREFIX/conf/jessie-packages
+    
+  echo "I: Re-seed debconf"
+  $PREFIX/02-seed-debconf
 
   echo "I: Performing dist-upgrade"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list
@@ -46,6 +49,9 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
 
     echo "I: make sure services are running"
     $PREFIX/11-monit
+
+    echo "I: Re-seed debconf"
+    $PREFIX/02-seed-debconf
   fi
 
   #
@@ -57,9 +63,12 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
   # If the install has failed, try to start pure-authd and carry on
   #
   if ! $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list ; then
-    /etc/init.d/pure-authd start
+    service pure-authd start
     apt-get install -f
   fi
+
+  echo "I: Re-seed debconf"
+  $PREFIX/02-seed-debconf
 
   echo "I: ensuring Symbiosis packages are installed"
   $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list $PREFIX/conf/jessie-packages
