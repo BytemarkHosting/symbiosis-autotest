@@ -12,4 +12,6 @@ phpmyadmin	phpmyadmin/mysql/admin-pass	 password	semiconscious malpractice
 roundcube-core roundcube/mysql/admin-password  password semiconscious malpractice
 # Just in case..
 dbconfig-common dbconfig-common/mysql/admin-password password semiconscious malpractice
+# Also remember the password.
+dbconfig-common dbconfig-common/remember-admin-pass     boolean true
 
