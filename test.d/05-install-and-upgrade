@@ -64,7 +64,7 @@ elif [ "dist-upgrade" = "$ACTION" ] ; then
   #
   if ! $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list ; then
     service pure-authd start
-    apt-get install -f
+    $PREFIX/bin/apt-get-install $PREFIX/conf/maker-sources.list 
   fi
 
   echo "I: Re-seed debconf"
