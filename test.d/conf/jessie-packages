@@ -5,7 +5,9 @@ bytemark-symbiosis
 symbiosis-backup
 symbiosis-common
 symbiosis-cron
+symbiosis-dns
 symbiosis-email
+symbiosis-email-activesync
 symbiosis-firewall
 symbiosis-ftpd
 symbiosis-httpd
@@ -14,12 +16,12 @@ symbiosis-monit
 symbiosis-mysql
 symbiosis-pam
 symbiosis-phpmyadmin
-symbiosis-dns
 symbiosis-updater
 symbiosis-webmail
 symbiosis-webmail-squirrelmail
 symbiosis-webmail-roundcube
 symbiosis-xmpp
+libapache2-mod-vhost-bytemark
 openssh-server
 postgresql
 ruby-pg
