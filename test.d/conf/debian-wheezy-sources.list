@@ -1,12 +1,9 @@
-#
 # Debian "wheezy"
 #
 deb     http://mirror.bytemark.co.uk/debian/     wheezy main contrib non-free
-deb-src http://mirror.bytemark.co.uk/debian/     wheezy main contrib non-free
 
 #
 # Security updates
 #
 deb     http://security.debian.org/ wheezy/updates  main contrib non-free
-deb-src http://security.debian.org/ wheezy/updates  main contrib non-free
 
