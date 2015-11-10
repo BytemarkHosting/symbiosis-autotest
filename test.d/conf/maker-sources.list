@@ -1,12 +1,7 @@
-deb http://maker2.bytemark.co.uk/archives/symbiosis-jessie/latest/ ./
-deb http://maker2.bytemark.co.uk/archives/netlinkrb/jessie/latest/ ./
-deb http://maker2.bytemark.co.uk/archives/prosody-modules/jessie/latest/ ./
-deb http://maker2.bytemark.co.uk/archives/ruby-cracklib/jessie/latest/ ./
-deb http://maker2.bytemark.co.uk/archives/bytemark-keys/jessie/latest/ ./
-deb http://maker2.bytemark.co.uk/archives/squirrelmail-change-pass/jessie/latest/ ./
-
-#
-# Backports (needed for roundcube)
-#
-deb     http://mirror.bytemark.co.uk/debian/     jessie-backports main contrib non-free
+deb http://maker2.bytemark.co.uk/archives/symbiosis-stretch/latest/ ./
+deb http://maker2.bytemark.co.uk/archives/netlinkrb/stretch/latest/ ./
+deb http://maker2.bytemark.co.uk/archives/prosody-modules/stretch/latest/ ./
+deb http://maker2.bytemark.co.uk/archives/ruby-cracklib/stretch/latest/ ./
+deb http://maker2.bytemark.co.uk/archives/bytemark-keys/stretch/latest/ ./
+deb http://maker2.bytemark.co.uk/archives/squirrelmail-change-pass/stretch/latest/ ./
 
