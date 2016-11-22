@@ -1,9 +1,9 @@
-
 stages:
-  - test
+  - install
+  - upgrade
 
 install:
-  stage: test
+  stage: install
   image: debian:jessie
   tags: 
     - docker
@@ -12,7 +12,7 @@ install:
     - /bin/run-parts $VERBOSE --new-session --exit-on-error $PWD/test.d
 
 dist-upgrade:
-  stage: test
+  stage: upgrade
   image: debian:wheezy
   tags: 
     - docker
@@ -21,7 +21,7 @@ dist-upgrade:
     - /bin/run-parts $VERBOSE --new-session --exit-on-error $PWD/test.d
 
 upgrade:
-  stage: test
+  stage: upgrade
   image: debian:jessie
   tags: 
     - docker
