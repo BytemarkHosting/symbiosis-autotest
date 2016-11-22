@@ -1,8 +1,9 @@
 
 stages:
-  - fresh-install
+  - test
 
 fresh-install:
+  stage: test
   image: debian:jessie
   tags: 
     - docker
