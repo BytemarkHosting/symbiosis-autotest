@@ -2,12 +2,13 @@
 stages:
   - test
 
-fresh-install:
+install:
   stage: test
   image: debian:jessie
   tags: 
     - docker
   script:
+    - echo -n install > $PWD/test.d/conf/action
     - /bin/run-parts $VERBOSE --new-session --exit-on-error $PWD/test.d
 
 dist-upgrade:
@@ -16,7 +17,7 @@ dist-upgrade:
   tags: 
     - docker
   script:
-    - echo dist-upgrade >> $PWD/test.d/action
+    - echo -n dist-upgrade > $PWD/test.d/conf/action
     - /bin/run-parts $VERBOSE --new-session --exit-on-error $PWD/test.d
 
 upgrade:
@@ -25,6 +26,6 @@ upgrade:
   tags: 
     - docker
   script:
-    - echo upgrade >> $PWD/test.d/action
+    - echo -n upgrade > $PWD/test.d/conf/action
     - /bin/run-parts $VERBOSE --new-session --exit-on-error $PWD/test.d
 
