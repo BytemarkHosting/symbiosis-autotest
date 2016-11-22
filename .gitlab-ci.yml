@@ -1,0 +1,10 @@
+
+stages:
+  - fresh-install
+
+fresh-install:
+  image: debian:jessie
+  tags: 
+    - docker
+  script:
+    - /bin/run-parts $VERBOSE --new-session --exit-on-error $PWD/test.d
