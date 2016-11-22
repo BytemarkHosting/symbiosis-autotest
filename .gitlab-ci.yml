@@ -9,3 +9,22 @@ fresh-install:
     - docker
   script:
     - /bin/run-parts $VERBOSE --new-session --exit-on-error $PWD/test.d
+
+dist-upgrade:
+  stage: test
+  image: debian:wheezy
+  tags: 
+    - docker
+  script:
+    - echo dist-upgrade >> $PWD/test.d/action
+    - /bin/run-parts $VERBOSE --new-session --exit-on-error $PWD/test.d
+
+upgrade:
+  stage: test
+  image: debian:jessie
+  tags: 
+    - docker
+  script:
+    - echo upgrade >> $PWD/test.d/action
+    - /bin/run-parts $VERBOSE --new-session --exit-on-error $PWD/test.d
+
